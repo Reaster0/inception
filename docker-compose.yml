@@ -2,7 +2,8 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:latest
+    build: ./nginx
+    #image: nginx:latest
     container_name: nginx
     ports:
       - "80:80"
@@ -10,6 +11,9 @@ services:
     depends_on:
       - wordpress
     restart: always
+    volumes:
+      - wordpress:/var/www/wordpress
+      - ./nginx/nginx.conf:/etc/nginx/sites-available/nginx.conf
     networks:
       - backend
     
