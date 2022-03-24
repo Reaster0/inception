@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - wordpress
+    restart: always
+    networks:
+      - backend
+    
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: always
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - backend
+
+volumes:
+  wordpress:
+
+networks:
+  backend:
