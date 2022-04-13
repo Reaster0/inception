@@ -8,8 +8,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - wordpress
+    #depends_on:
+    #  - wordpress
     restart: always
     volumes:
       - wordpress:/var/www/wordpress
@@ -17,14 +17,14 @@ services:
     networks:
       - backend
     
-  wordpress:
-    image: wordpress:latest
-    container_name: wordpress
-    restart: always
-    volumes:
-      - wordpress:/var/www/html
-    networks:
-      - backend
+  # wordpress:
+  #   image: wordpress:latest
+  #   container_name: wordpress
+  #   restart: always
+  #   volumes:
+  #     - wordpress:/var/www/html
+  #   networks:
+  #     - backend
 
 volumes:
   wordpress:
