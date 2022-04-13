@@ -8,26 +8,55 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    #depends_on:
-    #  - wordpress
+    depends_on:
+      - wordpress
     restart: always
     volumes:
-      - wordpress:/var/www/wordpress
+      - ./data/html:/var/www/wordpress
       - ./nginx/nginx.conf:/etc/nginx/sites-available/nginx.conf
     networks:
       - backend
     
-  # wordpress:
-  #   image: wordpress:latest
-  #   container_name: wordpress
-  #   restart: always
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   networks:
-  #     - backend
-
-volumes:
   wordpress:
+    build: ./wordpress
+    #image: wordpress:latest
+    container_name: wordpress
+    restart: always
+    ports:
+     - "9000:9000"
+    depends_on:
+      - mariadb
+    volumes:
+      - ./data/html:/var/www/html
+    networks:
+      - backend
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    #volumes:
+    networks:
+      - backend
+
+# volumes:
+#   mdb:
+#     driver: local
+#     driver_opts:
+#       type: "none"
+#       o: "bind"
+#       device: "/Users/reaster/42-Work/inception/data/mysql"
+#       #devile: "${HOME}/data/html"
+
+#   wordpress:
+#     driver: local
+#     driver_opts:
+#       type: "none"
+#       o: "bind"
+#       devile: "/Users/reaster/42-Work/inception/data/html"
+#       #device: "${HOME}/data/html"
 
 networks:
   backend:
