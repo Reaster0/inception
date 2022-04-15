@@ -2,42 +2,51 @@ version: '3'
 
 services:
   nginx:
-    build: ./nginx
-    #image: nginx:latest
+    #build: ./nginx
+    image: nginx:alpine
     container_name: nginx
     ports:
       - "80:80"
-      - "443:443"
+    #  - "443:443"
     depends_on:
       - wordpress
     restart: always
     volumes:
-      - ./data/html:/var/www/wordpress
-      - ./nginx/nginx.conf:/etc/nginx/sites-available/nginx.conf
+      - nginx:/etc/nginx/conf.d
+      - /data/html:/var/www/html
     networks:
       - backend
     
   wordpress:
-    build: ./wordpress
-    #image: wordpress:latest
+    #build: ./wordpress
+    image: wordpress:php7.3-fpm-alpine
     container_name: wordpress
     restart: always
-    ports:
-     - "9000:9000"
     depends_on:
       - mariadb
     volumes:
       - ./data/html:/var/www/html
     networks:
       - backend
+    environment:
+      WORDPRESS_DB_HOST:  mysql
+      MYSQL_ROOT_PASSWORD:  mysql_root_pass
+      WORDPRESS_DB_NAME:  db_name
+      WORDPRESS_DB_USER:  user_name
+      WORDPRESS_DB_PASSWORD:  user_pass
+      WORDPRESS_TABLE_PREFIX: wp_
 
   mariadb:
-    image: mariadb:latest
+    image: mariadb
     container_name: mariadb
     restart: always
-    ports:
-      - "3306:3306"
-    #volumes:
+    environment:
+      MYSQL_ROOT_PASSWORD:  mysql_root_pass
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: user_name
+      MYSQL_PASSWORD: user_pass
+    volumes:
+      - /data/mysql:/var/lib/mysql
     networks:
       - backend
 
