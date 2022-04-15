@@ -7,39 +7,16 @@ services:
     container_name: nginx
     ports:
       - "80:80"
-    #  - "443:443"
+    # - "443:443"
     depends_on:
-      - wordpress
+     - wordpress
     restart: always
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./data/html:/var/www/html
-    # networks:
-    #   - backend
-    links:
-      - wordpress
+    networks:
+       - backend
     
-  wordpress:
-    #build: ./wordpress
-    image: wordpress:php7.3-fpm-alpine
-    container_name: wordpress
-    restart: always
-    depends_on:
-      - mariadb
-    volumes:
-      - ./data/html:/var/www/html
-    #networks:
-    #  - backend
-    links:
-      - mariadb
-    environment:
-      WORDPRESS_DB_HOST:  mysql
-      MYSQL_ROOT_PASSWORD:  mysql_root_pass
-      WORDPRESS_DB_NAME:  db_name
-      WORDPRESS_DB_USER:  user_name
-      WORDPRESS_DB_PASSWORD:  user_pass
-      WORDPRESS_TABLE_PREFIX: wp_
-
   mariadb:
     image: mariadb
     container_name: mariadb
@@ -53,6 +30,33 @@ services:
       - ./data/mysql:/var/lib/mysql
     networks:
       - backend
+
+  wordpress:
+    build: ./wordpress
+    #image: wordpress:php7.3-fpm-alpine
+    container_name: wordpress
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - ./data/html:/var/www/html
+    networks:
+      - backend
+    environment:
+      WORDPRESS_DB_HOST:  mariadb
+      MYSQL_ROOT_PASSWORD:  mysql_root_pass
+      WORDPRESS_DB_NAME:  db_name
+      WORDPRESS_DB_USER:  user_name
+      WORDPRESS_USER: reaster
+      WORDPRESS_PASSWORD:  12345678
+      WORDPRESS_DB_PASSWORD:  user_pass
+      WORDPRESS_TABLE_PREFIX: wp_
+      TITLE: mysebsite
+      URL: http://mywebsite.com
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: admin
+      ADMIN_EMAIL: admin@admin.fr
+
 
 # volumes:
 #   mdb:
