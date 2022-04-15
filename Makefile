@@ -15,7 +15,11 @@ down:	$(SRCS)
 			sudo docker-compose down
 
 clean:	down
-		sudo docker image rm inception_nginx && docker image rm inception_wordpress
+#		sudo docker image rm inception_nginx && docker image rm inception_wordpress
+		rm -r ./data/html/.*
+		rm -r ./data/mysql/.*
+		rm -r ./data/html/*
+		rm -r ./data/mysql/*
 		
 fclean:		clean
 			sudo yes | docker system prune

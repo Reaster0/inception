@@ -12,10 +12,12 @@ services:
       - wordpress
     restart: always
     volumes:
-      - nginx:/etc/nginx/conf.d
-      - /data/html:/var/www/html
-    networks:
-      - backend
+      - ./nginx:/etc/nginx/conf.d
+      - ./data/html:/var/www/html
+    # networks:
+    #   - backend
+    links:
+      - wordpress
     
   wordpress:
     #build: ./wordpress
@@ -26,8 +28,10 @@ services:
       - mariadb
     volumes:
       - ./data/html:/var/www/html
-    networks:
-      - backend
+    #networks:
+    #  - backend
+    links:
+      - mariadb
     environment:
       WORDPRESS_DB_HOST:  mysql
       MYSQL_ROOT_PASSWORD:  mysql_root_pass
@@ -46,7 +50,7 @@ services:
       MYSQL_USER: user_name
       MYSQL_PASSWORD: user_pass
     volumes:
-      - /data/mysql:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     networks:
       - backend
 
