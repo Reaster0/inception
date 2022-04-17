@@ -16,5 +16,4 @@ COPY ./launch.sh /
 RUN chmod +x ./launch.sh
 COPY ./wp-config.php /
 
-#ENTRYPOINT tail -f /dev/null
-ENTRYPOINT /launch.sh && /usr/sbin/php-fpm7.3 -F
+ENTRYPOINT  /launch.sh
