@@ -1,26 +1,24 @@
-FROM debian:buster
+FROM alpine
 
-RUN apt update && apt upgrade -y && apt install -y \
-	vim \
-	curl \
-	php \
-	wget \
-	php7.3-fpm \
-	php-mbstring \
-	php-mysql
+RUN apk update && apk upgrade && \
+	apk add \
+	php7 \
+	php7-fpm \
+	php7-mysqli \
+	php7-json
+	# php7-session
+	# php7-xml \
+	# php7-curl \
+	# php7-iconv \
+	# php7-phar
+	# php7-redis
+	# php7-ctype
 
 RUN wget https://wordpress.org/latest.tar.gz -P /
 RUN tar -xf latest.tar.gz && rm -rf latest.tar.gz
 COPY wp-config.php /wordpress/
+COPY www.conf /etc/php7/php-fpm.d/
 RUN mkdir /run/php
-ENTRYPOINT cp -rf /wordpress/* /var/www/html/ && php-fpm7.3 --nodaemonize
-
-# RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-# 	&& chmod +x wp-cli.phar
-# RUN chmod +x wp-cli.phar
-# RUN mv wp-cli.phar /usr/local/bin/wp
-# COPY ./launch.sh /
-# RUN chmod +x ./launch.sh
-# COPY ./wp-config.php /
-
-# ENTRYPOINT  /launch.sh
+COPY docker-entrypoint.sh /
+RUN chmod +x docker-entrypoint.sh
+ENTRYPOINT sh docker-entrypoint.sh
