@@ -2,8 +2,8 @@ version: '3'
 
 services:
   nginx:
-    #build: ./nginx
-    image: nginx:alpine
+    build: ./nginx
+    #image: nginx:alpine
     container_name: nginx
     ports:
       - "80:80"
@@ -12,8 +12,8 @@ services:
      - wordpress
     restart: always
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./data/html:/var/www/html
+      #- ./nginx:/etc/nginx/conf.d
+      - wp_vol:/var/www/html
     networks:
        - backend
     
@@ -27,7 +27,7 @@ services:
       MYSQL_USER: user_name
       MYSQL_PASSWORD: user_pass
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - db_vol:/var/lib/mysql
     networks:
       - backend
 
@@ -39,7 +39,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - ./data/html:/var/www/html
+      - wp_vol:/var/www/html
     networks:
       - backend
     environment:
@@ -58,22 +58,19 @@ services:
       ADMIN_EMAIL: admin@admin.fr
 
 
-# volumes:
-#   mdb:
-#     driver: local
-#     driver_opts:
-#       type: "none"
-#       o: "bind"
-#       device: "/Users/reaster/42-Work/inception/data/mysql"
-#       #devile: "${HOME}/data/html"
-
-#   wordpress:
-#     driver: local
-#     driver_opts:
-#       type: "none"
-#       o: "bind"
-#       devile: "/Users/reaster/42-Work/inception/data/html"
-#       #device: "${HOME}/data/html"
+volumes:
+    wp_vol:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: 'data/html'
+    db_vol:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: 'data/mysql'
 
 networks:
   backend:

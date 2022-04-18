@@ -1,8 +1,8 @@
 <?php
-define( 'DB_NAME', 'db_name' );
-define( 'DB_USER', 'user_name' );
-define( 'DB_PASSWORD', 'user_pass' );
-define( 'DB_HOST', 'mariadb' );
+define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
+define( 'DB_USER', getenv('WORDPRESS_DB_USER') );
+define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
+define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
 define( 'DB_CHARSET', 'utf8' );
 
 define( 'DB_COLLATE', '' );
@@ -18,7 +18,7 @@ define( 'NONCE_SALT',       'c etait sur en fait!' );
 // define('WP_HOME', 'http://earnaud.42.fr');
 // define('WP_SITEURL','http://earnaud.42.fr');
 
-$table_prefix = 'wp_';
+$table_prefix = getenv('WORDPRESS_TABLE_PREFIX');
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_DISPLAY', false );
 define( 'WP_DEBUG_LOG', true );
