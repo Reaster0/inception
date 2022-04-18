@@ -18,7 +18,8 @@ services:
        - backend
     
   mariadb:
-    image: mariadb
+    build : ./mariadb
+    #image: mariadb
     container_name: mariadb
     restart: always
     environment:
