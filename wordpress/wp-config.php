@@ -15,8 +15,8 @@ define( 'SECURE_AUTH_SALT', 'c etait sur en fait!' );
 define( 'LOGGED_IN_SALT',   'c etait sur en fait!' );
 define( 'NONCE_SALT',       'c etait sur en fait!' );
 
-// define('WP_HOME', 'http://earnaud.42.fr');
-// define('WP_SITEURL','http://earnaud.42.fr');
+// define('WP_HOME', 'https://earnaud.42.fr');
+// define('WP_SITEURL','https://earnaud.42.fr');
 
 $table_prefix = getenv('WORDPRESS_TABLE_PREFIX');
 define( 'WP_DEBUG', true );

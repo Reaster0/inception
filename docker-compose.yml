@@ -6,7 +6,6 @@ services:
     #image: nginx:alpine
     container_name: nginx
     ports:
-      - "80:80"
       - "443:443"
     depends_on:
      - wordpress
@@ -25,10 +24,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD:  mysql_root_pass
       MYSQL_DATABASE: db_name
-      MYSQL_ADMIN: macron
-      MYSQL_ADMIN_PASSWORD: demission
-      MYSQL_USER: earnaud
-      MYSQL_PASSWORD: 1234
+      MYSQL_USER: macron
+      MYSQL_PASSWORD: demission
     volumes:
       - db_vol:/var/lib/mysql
     networks:
@@ -49,10 +46,10 @@ services:
       WORDPRESS_DB_HOST:  mariadb
       MYSQL_ROOT_PASSWORD:  mysql_root_pass
       WORDPRESS_DB_NAME:  db_name
-      WORDPRESS_DB_USER:  earnaud
-      WORDPRESS_USER: reaster
+      WORDPRESS_DB_USER:  macron
+      WORDPRESS_DB_PASSWORD:  demission
+      WORDPRESS_USER: earnaud
       WORDPRESS_PASSWORD:  12345678
-      WORDPRESS_DB_PASSWORD:  1234
       WORDPRESS_TABLE_PREFIX: wp_
       TITLE: mysebsite
       URL: http://mywebsite.com
