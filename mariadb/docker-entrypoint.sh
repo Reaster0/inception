@@ -1,5 +1,5 @@
 #bin/sh
-
+sleep 3
 service mysql start
 echo "setup mysql ❇️"
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;"
@@ -9,4 +9,4 @@ mysql -u root -e "FLUSH PRIVILEGES;"
 service mysql stop
 echo "starting mysql ✅"
 mysqld_safe
-echo "is not okay?"
+echo "mariadb is not okay?"
