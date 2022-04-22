@@ -1,6 +1,6 @@
 #bin/sh
-sleep 3
 service mysql start
+sleep 3
 echo "setup mysql ❇️"
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;"
 mysql -u root -e "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
