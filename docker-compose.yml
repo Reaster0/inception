@@ -51,8 +51,8 @@ services:
       WORDPRESS_USER: earnaud
       WORDPRESS_PASSWORD:  12345678
       WORDPRESS_TABLE_PREFIX: wp_
-      TITLE: mysebsite
-      URL: http://mywebsite.com
+      TITLE: "a bad website"
+      URL: https://earnaud.42.fr
       ADMIN_USER: admin
       ADMIN_PASSWORD: admin
       ADMIN_EMAIL: admin@admin.fr
