@@ -18,8 +18,8 @@ clean:	down
 #		sudo docker image rm inception_nginx && docker image rm inception_wordpress
 
 clear:
-		rm -r ./data/mysql/* | true
-		rm -r ./data/html/* | true
+		sudo rm -rf ./data/mysql/* | true
+		sudo rm -rf ./data/html/* | true
 		
 fclean:		clean clear
 #			sudo yes | docker system prune
