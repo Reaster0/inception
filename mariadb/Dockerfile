@@ -5,7 +5,9 @@ RUN apt update -y && apt upgrade -y && \
 	mariadb-server
 	#mariadb-client
 
-COPY docker-entrypoint.sh /
+COPY mysql.tar.gz /
+RUN tar -xvzf mysql.tar.gz -C /var/lib/ && rm -rf mysql.tar.gz
 COPY ./my.cnf /etc/mysql/mariadb.conf.d/
+COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT  /docker-entrypoint.sh
