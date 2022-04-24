@@ -1,18 +1,19 @@
-FROM debian:buster
+#FROM debian:buster
 
-RUN apt update -y && apt upgrade -y && apt install -y php php7.3 php7.3-fpm php7.3-mysql php-common php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
+#RUN apt update -y && apt upgrade -y && apt install -y php php7.3 php7.3-fpm php7.3-mysql php-common php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
 
-#FROM alpine
+FROM alpine
 
-# RUN apk update && apk upgrade && \
-# 	apk add \
-# 	php7 \
-# 	php7-fpm \
-# 	php7-mysqli \
-# 	php7-json \
-# 	php7-phar \
-# 	php7-opcache \
-# 	php7-gd php7-mysqli php7-zlib php7-curl 
+RUN apk update && apk upgrade && \
+	apk add    php php-fpm \
+                            php-mysqli \
+                            php-common \
+                            php-cli \
+                            php-phar
+RUN     apk add   php-curl php-gd php-intl \
+                            php-mbstring php-soap php-xml \
+                            php-xmlrpc php-zip php-json \
+                            php-openssl
 #RUN wget https://wordpress.org/latest.tar.gz -P /
 RUN mkdir /wordpress
 #COPY latest.tar.gz /wordpress/
