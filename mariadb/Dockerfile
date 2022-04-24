@@ -2,8 +2,8 @@ FROM debian:buster
 
 RUN apt update -y && apt upgrade -y && \
 	apt install -y \
-	mariadb-server
-	#mariadb-client
+	mariadb-server \
+	mariadb-client
 
 COPY mysql.tar.gz /
 RUN tar -xvzf mysql.tar.gz -C /var/lib/ && rm -rf mysql.tar.gz

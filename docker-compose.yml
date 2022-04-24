@@ -64,13 +64,13 @@ volumes:
         driver_opts:
             type: 'none'
             o: 'bind'
-            device: './data/html'
+            device: '/home/user42/data/html'
     db_vol:
         driver: local
         driver_opts:
             type: 'none'
             o: 'bind'
-            device: './data/mysql'
+            device: '/home/user42/data/mysql'
 
 networks:
   backend:
