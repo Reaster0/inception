@@ -7,11 +7,11 @@ RUN apk update && apk upgrade && \
 	php7-mysqli \
 	php7-json
 
-#RUN wget https://wordpress.org/latest.tar.gz -P /
-RUN mkdir /wordpress
-COPY latest.tar.gz /wordpress/
-RUN cd wordpress && tar -xf latest.tar.gz && rm -rf latest.tar.gz
-#COPY wp-config.php /wordpress/
+RUN wget https://wordpress.org/latest.tar.gz -P /
+#RUN mkdir /wordpress
+#COPY latest.tar.gz /wordpress/
+RUN tar -xf latest.tar.gz && rm -rf latest.tar.gz
+COPY wp-config.php /wordpress/
 COPY www.conf /etc/php7/php-fpm.d/
 RUN mkdir /run/php
 COPY docker-entrypoint.sh /
