@@ -3,7 +3,6 @@ version: '3'
 services:
   nginx:
     build: ./nginx
-    #image: nginx:alpine
     container_name: nginx
     ports:
       - "443:443"
@@ -11,14 +10,12 @@ services:
      - wordpress
     restart: always
     volumes:
-      #- ./nginx:/etc/nginx/conf.d
       - wp_vol:/var/www/html
     networks:
        - backend
     
   mariadb:
     build : ./mariadb
-    #image: mariadb
     container_name: mariadb
     restart: always
     environment:
@@ -33,7 +30,6 @@ services:
 
   wordpress:
     build: ./wordpress
-    #image: wordpress:php7.3-fpm-alpine
     container_name: wordpress
     restart: always
     depends_on:
@@ -48,14 +44,7 @@ services:
       WORDPRESS_DB_NAME:  db_name
       WORDPRESS_DB_USER:  macron
       WORDPRESS_DB_PASSWORD:  demission
-      WORDPRESS_USER: earnaud
-      WORDPRESS_PASSWORD:  12345678
       WORDPRESS_TABLE_PREFIX: wp_
-      TITLE: "a bad website"
-      URL: https://earnaud.42.fr
-      ADMIN_USER: admin
-      ADMIN_PASSWORD: admin
-      ADMIN_EMAIL: admin@admin.fr
 
 
 volumes:
