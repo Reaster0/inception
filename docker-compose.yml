@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    build: ./nginx
+    build: ./srcs/nginx
     container_name: nginx
     ports:
       - "443:443"
@@ -15,7 +15,7 @@ services:
        - backend
     
   mariadb:
-    build : ./mariadb
+    build : ./srcs/mariadb
     container_name: mariadb
     restart: always
     environment:
@@ -29,7 +29,7 @@ services:
       - backend
 
   wordpress:
-    build: ./wordpress
+    build: ./srcs/wordpress
     container_name: wordpress
     restart: always
     depends_on:

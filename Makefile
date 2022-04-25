@@ -1,14 +1,11 @@
-SRCS		:= nginx/Dockerfile \
-				docker-compose.yml
-
 all:		up
 
-up:		$(SRCS)
+up:
 			mkdir /home/user42/data/mysql | true
 			mkdir /home/user42/data/html | true
 			sudo docker-compose up --build
 
-down:	$(SRCS)
+down:
 			sudo docker-compose down
 
 clear:
